@@ -1,0 +1,14 @@
+---
+- hosts: docker-deploy
+  become: true
+  tasks:
+  - name: Install Docker
+    package:
+      name: docker
+      state: present
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+  - name: create a container
+    command: docker run -itd --name calweb -p 80:80 haneef7/calweb
